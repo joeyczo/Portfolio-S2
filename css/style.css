@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+*
+{
+    padding: 0;
+    margin:  0;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+.material-symbols-rounded
+{
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+}
+
+/* NAV BAR */
+nav
+{
+    height: 5dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    padding: 40px 90px;
+}
+nav .start
+{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+}
+nav .end
+{
+    display: flex;
+    align-items: center;
+}
+nav .end a
+{
+    color: #000;
+    margin: 0 10px;
+    transition: 0.4s;
+}
+nav .end a:visited
+{
+    color: #000000;
+}
+
+/* PAGE INDEX */
+.hero
+{
+    height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 90px;
+}
+.hero .titre
+{
+    display: flex;
+    flex-direction: column;
+    max-width: 40vw;
+}
+.hero .titre h1
+{
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.hero .titre h2
+{
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--couleur-secondaire);
+}
+.hero .img
+{
+    z-index: -1;
+    user-select: none;
+    -ms-user-select: none;
+}
+
+/* Séparateur */
+.sep
+{
+    margin: 200px 0;
+    padding: 150px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sep::before
+{
+    content: "";
+    background-image: url("../img/w.svg");
+    width: 1000px;
+    height: 45px;
+}
+
+/* Présentation */
+.pres
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 90px;
+}
+.pres .titre
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pres .titre h1
+{
+    color: var(--couleur-secondaire-attn);
+    font-size: 7.5rem;
+    font-weight: 700;
+    -ms-user-select: none;
+    user-select: none;
+}
+.pres .titre h2
+{
+    font-size: 5.5rem;
+    font-weight: 700;
+    margin: -85px 0;
+}
+.pres .disp-infos
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 220px 0;
+}
+.pres .disp-infos .text
+{
+    display: flex;
+    flex-direction: column;
+}
+.pres .disp-infos .text p
+{
+    margin: 20px 0;
+    font-size: 18px;
+}
+.pres .disp-infos .img
+{
+    width: 80vw;
+    background-image: url("../img/f1.svg");
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: rotate(70deg);
+}
+
+/* COMPETENCES */
+.comp
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.comp .titre
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.comp .titre h1
+{
+    color: var(--couleur-secondaire-attn);
+    font-size: 7.5rem;
+    font-weight: 700;
+    -ms-user-select: none;
+    user-select: none;
+}
+.comp .titre h2
+{
+    font-size: 5.5rem;
+    font-weight: 700;
+    margin: -85px 0;
+}
+.comp .disp-lien
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 300px 0;
+    flex-direction: column;
+}
+.comp .disp-lien .link
+{
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    cursor: pointer;
+    padding: 25px;
+    border-radius: 20px;
+    transition: 0.4s;
+    position: relative;
+    overflow: hidden;
+    margin: 50px 0;
+}
+.comp .disp-lien .link:after
+{
+    font-family: "Material Symbols Rounded", sans-serif;
+    content : "\e5c8";
+    font-size: 2rem;
+    right: -50px;
+    position: absolute;
+    transition: 0.4s;
+}
+.comp .disp-lien .link:hover:after
+{
+    right: 20px;
+}
+.comp .disp-lien .link h1
+{
+    font-weight: 600;
+}
+.comp .disp-lien .link h2
+{
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0 20px;
+}
+.comp::before
+{
+    content: "\f526";
+    font-family: "Material Symbols Rounded", sans-serif;
+    color: var(--couleur-secondaire-attn);
+    font-size: 900px;
+    filter: blur(10px);
+    position: absolute;
+    bottom: 0;
+    right: 90px;
+}
+
+/* Proejts */
+.proj
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.proj .titre
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.proj .titre h1
+{
+    color: var(--couleur-secondaire-attn);
+    font-size: 7.5rem;
+    font-weight: 700;
+    -ms-user-select: none;
+    user-select: none;
+}
+.proj .titre h2
+{
+    font-size: 5.5rem;
+    font-weight: 700;
+    margin: -85px 0;
+}
+.proj .prt-grid
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 300px 0;
+}
+.proj .prt-grid img
+{
+    user-select: none;
+    -ms-user-select: none;
+}
+.proj::before
+{
+    content: "\eb3f";
+    font-family: "Material Symbols Rounded", sans-serif;
+    color: var(--couleur-secondaire-attn);
+    font-size: 900px;
+    filter: blur(10px);
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+    z-index: -1;
+}
+
+/**************************/
+/*      COMPÉTENCES       */
+/**************************/
+
+.hero-c
+{
+    height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 90px;
+}
+.hero-c .title
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hero-c .title h1
+{
+    letter-spacing: 13px;
+    font-size: 6rem;
+    font-weight: 800;
+}
+.hero-c .title h2
+{
+    color: var(--couleur-competence-1);
+    margin: 20px 0;
+}
+
+/* DEGRADE C1 */
+.c1-h
+{
+    background: radial-gradient(99.63% 90.83% at 50% 9.17%, rgba(184, 34, 5, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50dvh;
+    z-index: -1;
+}
+
+/* DEGRADE C3 */
+.c3-h
+{
+    background: radial-gradient(99.63% 90.83% at 50% 9.17%, rgba(251, 195, 41, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50dvh;
+    z-index: -1;
+}
+
+/* DEGRADE C4 */
+.c4-h
+{
+    background: radial-gradient(99.63% 90.83% at 50% 9.17%, rgba(154, 207, 89, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50dvh;
+    z-index: -1;
+}
+
+/* DEGRADE C6 */
+.c6-h
+{
+    background: radial-gradient(99.63% 90.83% at 50% 9.17%, rgba(117, 9, 187, 0.60) 0%, rgba(255, 255, 255, 0.00) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50dvh;
+    z-index: -1;
+}
+
+
+:root
+{
+    --couleur-secondaire        : #6F6F6F;
+    --couleur-secondaire-attn   : #F1F1F1;
+
+    /* COMPETENCE 1 */
+    --couleur-competence-1              : #FF4F2D;
+    --couleur-competence-1-secondaire   : #FFF1EE;
+    --couleur-competence-1-tab          : #FFE0E0;
+    --couleur-competence-1-tab2         : #FFA5A5 ;
+    --couleur-competence-1-lien         : #FF7B62;
+
+    /* COMPETENCE 3 */
+    --couleur-competence-3              : #FFC528;
+    --couleur-competence-3-secondaire   : #FFF7E1;
+    --couleur-competence-3-tab          : #FFF1C3;
+    --couleur-competence-3-tab2         : #FFE388;
+    --couleur-competence-3-lien         : #FFE498;
+
+    /* COMPETENCE 4 */
+    --couleur-competence-4              : #61B000;
+    --couleur-competence-4-secondaire   : #F4FFE5;
+    --couleur-competence-4-tab          : #E1FDB3;
+    --couleur-competence-4-tab2         : #CBFF79;
+    --couleur-competence-4-lien         : #CBFF8B;
+
+    /* COMPETENCE 6 */
+    --couleur-competence-6              : #5D0199;
+    --couleur-competence-6-secondaire   : #F9F0FF;
+    --couleur-competence-6-tab          : #E8BEFF;
+    --couleur-competence-6-tab2         : #D07AFF;
+    --couleur-competence-6-lien         : #D28DFF;
+
+}
