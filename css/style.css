@@ -314,7 +314,6 @@ nav .end a:visited
 }
 .hero-c .title h2
 {
-    color: var(--couleur-competence-1);
     margin: 20px 0;
 }
 
@@ -497,7 +496,7 @@ nav .end a:visited
 .crit-c .disp-grid-crit
 {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 50px;
     margin: 70px 0;
 }
@@ -659,6 +658,7 @@ nav .end a:visited
     --couleur-competence-3-tab          : #FFF1C3;
     --couleur-competence-3-tab2         : #FFE388;
     --couleur-competence-3-lien         : #FFE498;
+    --couleur-comp3-gradient            : linear-gradient(135deg, #FFBD06 -13.58%, #FFF5DB 132.09%);
 
     /* COMPETENCE 4 */
     --couleur-competence-4              : #61B000;
