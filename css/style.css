@@ -666,6 +666,7 @@ nav .end a:visited
     --couleur-competence-4-tab          : #E1FDB3;
     --couleur-competence-4-tab2         : #CBFF79;
     --couleur-competence-4-lien         : #CBFF8B;
+    --couleur-comp4-gradient            : linear-gradient(135deg, #B9EA7D -13.58%, #629325 132.09%);
 
     /* COMPETENCE 6 */
     --couleur-competence-6              : #5D0199;
