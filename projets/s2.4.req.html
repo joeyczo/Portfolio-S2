@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REQUÊTES</title>
+</head>
+<body>
+
+    <pre>
+
+-- Cas    : ( HLSMPC )
+-- Auteur : CAUVIN Pierre, CAZO Joey, GUELLE Clément
+-- Date   : lun. 13 mai
+-- Objectif : Réaliser des requêtes permettant de trouver
+
+
+
+---------------------------------
+---       REQUÊTES C1         ---
+---------------------------------
+
+
+-- 1. Les noms des services ayant plus de 100 lits
+
+SELECT  nom_serv AS "Services avec plus de 100 lits"
+FROM    service
+WHERE   nb_lits > 100;
+
+
+-- 2. Noms des hôpitaux qui ont un service de Cardiologie.
+
+SELECT  DISTINCT (nom_hop) AS "Hopitaux avec service Cardiologie"
+FROM    hopital hop JOIN service serv
+        ON hop.idhop = serv.idhop
+WHERE   nom_serv = 'Cardiologie';
+
+
+-- 3. Les noms des laboratoires de l’hôpital Jacques Monod.
+
+SELECT  nom_lab AS "Laboratoire de l’hôpital Jacques Monod"
+FROM    laboratoire lab JOIN hopital hop ON lab.idhop = hop.idhop
+WHERE   nom_hop = 'Jacques Monod';
+
+
+-- 4. Noms des patients ayant consulté un gynécologue.
+
+SELECT  DISTINCT nom_pat AS "Patients ayant consulté un gynécologue"
+FROM    patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                    JOIN medecin  med  ON cons.idmed = med.idmed
+WHERE   spec = 'Gynécologue';
+
+
+-- 5. Liste des consultations de médecins (nom du médecin, nom du patient et la date de consultation).
+
+SELECT  nom_med, nom_pat, date_consult AS "Liste de consultation"
+FROM    consulte cons JOIN medecin med ON cons.idmed = med.idmed
+                      JOIN patient pat ON cons.idpat = pat.idpat;
+
+
+-- 6. Noms des patients ayant consulté un médecin consultant indépendant à l'hôpital Jacques Monod.
+
+SELECT  nom_pat AS "Patients ayant consulté un médecin consultant à l'hôpital Jacques Monod"
+FROM    patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                    JOIN medecin  med  ON cons.idmed = med.idmed
+                    JOIN hopital  hop  ON med.idhop  = hop.idhop
+WHERE   fct = 'CONSULTANT' AND
+    nom_hop = 'Jacques Monod';
+
+
+-- 7. Noms des patients n'ayant consulté qu'à l'hôpital Jacques Monod
+
+SELECT  nom_pat AS "Patients n'ayant consulté qu'à l'hôpital Jacques Monod"
+FROM    patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                    JOIN medecin  med  ON cons.idmed = med.idmed
+                    JOIN hopital  hop  ON med.idhop  = hop.idhop
+
+EXCEPT
+
+SELECT  nom_pat
+FROM    patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                    JOIN medecin  med  ON cons.idmed = med.idmed
+                    JOIN hopital  hop  ON med.idhop  = hop.idhop
+WHERE   nom_hop != 'Jacques Monod';
+
+
+
+
+---------------------------------
+---       REQUÊTES C2         ---
+---------------------------------
+
+
+-- 1. Liste des noms des médecins de la même spécialité que le médecin Firmin, cette liste est triée par ordre alphabétique.
+
+SELECT  nom_med AS "Médecins de la même spécialité que le médecin Firmin"
+FROM    MEDECIN
+WHERE   spec IN (   SELECT spec
+                    FROM MEDECIN
+                    WHERE nom_med = 'Firmin' ) AND
+        nom_med != 'Firmin'
+ORDER BY nom_med;
+
+-- 2. Les noms des hôpitaux avec un service de Cardiologie de capacité supérieure au service de Cardiologie de l'hôpital Jacques Monod.
+
+SELECT   nom_hop AS "Nom hôpitaux"
+FROM     HOPITAL JOIN SERVICE ON HOPITAL.idHop = SERVICE.idHop
+WHERE    nom_serv = 'Cardiologie' AND
+         nb_lits > (    SELECT nb_lits
+                        FROM HOPITAL JOIN SERVICE ON HOPITAL.idHop = SERVICE.idHop
+                        WHERE   nom_hop  = 'Jacques Monod' AND
+                                nom_serv = 'Cardiologie' );
+
+-- 3. Les hôpitaux ayant plus de 300 lits.
+
+SELECT  nom_hop AS "Les hôpitaux ayant plus de 300 lits"
+FROM    HOPITAL JOIN SERVICE ON HOPITAL.idHop = SERVICE.idHop
+GROUP BY nom_hop
+HAVING SUM(nb_lits) > 300;
+
+
+-- 4. Les patients ayant consulté dans plusieurs hôpitaux.
+
+SELECT  DISTINCT(nom_pat) AS "Patients ayant consulté dans plusieurs hôpitaux"
+FROM    patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                    JOIN medecin  med  ON cons.idmed = med.idmed
+                    JOIN hopital  hop  ON med.idhop  = hop.idhop
+WHERE   nom_pat IN ( SELECT nom_pat
+                     FROM   patient pat JOIN consulte cons ON pat.idpat  = cons.idpat
+                                        JOIN medecin  med  ON cons.idmed = med.idmed
+                                        JOIN hopital  hop  ON med.idhop  = hop.idhop
+                     GROUP BY nom_pat
+                     HAVING COUNT(DISTINCT nom_hop) > 1);
+
+
+
+-- 5. Le nombre de lits par type de service pour l'ensemble des hôpitaux.
+SELECT    nom_serv, SUM(nb_lits) AS total_lits
+FROM      SERVICE
+GROUP BY  nom_serv;
+
+
+
+-- 6. Liste des noms des médecins et du nombre de patients examinés par médecin. La liste est triée par ordre décroissant du nombre de patients.
+SELECT  nom_med, COUNT(DISTINCT idPat) AS nb_patients
+FROM    medecin m JOIN consulte c ON m.idMed = c.idMed
+GROUP BY nom_med
+ORDER BY nb_patients DESC;
+
+
+-- 7. Les noms des médecins ayant plus de patients que le médecin Firmin.
+SELECT   nom_med
+FROM     medecin m JOIN consulte c ON m.idMed = c.idMed
+GROUP BY nom_med
+HAVING   COUNT(DISTINCT idPat) > (
+                                    SELECT  COUNT(DISTINCT idPat)
+                                    FROM    medecin m2 JOIN consulte c2 ON m2.idMed = c2.idMed
+                                    WHERE   nom_med = 'Firmin'
+                                );
+
+
+-- 8. Les patients ayant fréquentés tous les services de l'hôpital Jacques Monod
+SELECT nom_pat
+FROM   PATIENT
+WHERE  idPat IN (
+                    SELECT CONSULTE.idPat
+                    FROM   CONSULTE JOIN MEDECIN ON CONSULTE.idMed = MEDECIN.idMed
+                    WHERE  MEDECIN.idHop = (
+                                                SELECT idHop
+                                                FROM HOPITAL
+                                                WHERE nom_hop  = 'Jacques Monod'
+                                            )
+                    GROUP BY CONSULTE.idPat
+                    HAVING COUNT(DISTINCT MEDECIN.idServ) = (
+                                                                SELECT COUNT(DISTINCT idServ)
+                                                                FROM SERVICE
+                                                                WHERE idHop = (
+                                                                                SELECT idHop
+                                                                                FROM HOPITAL
+                                                                                WHERE nom_hop = 'Jacques Monod'
+                                                                                )
+                                                                )
+                    );
+
+
+
+
+-- 9. Les hôpitaux ayant exactement les mêmes laboratoires que l'hôpital Jacques Monod.
+
+SELECT  DISTINCT (nom_hop) AS "Hôpitaux ayant exactement les mêmes laboratoires que l'hôpital Jacques Monod"
+FROM    hopital
+WHERE   nom_hop IN (
+                        SELECT nom_hop
+                        FROM   hopital hop JOIN laboratoire lab ON hop.idhop = lab.idhop
+                        WHERE  nom_lab IN (
+                                            SELECT  nom_lab
+                                            FROM    hopital hop JOIN laboratoire lab ON hop.idhop = lab.idhop
+                                            WHERE   nom_hop = 'Jacques Monod'
+                                           )
+                        GROUP BY nom_hop
+                        HAVING COUNT(hop.nom_hop) = (
+                                                        SELECT count(nom_lab)
+                                                        FROM   laboratoire lab JOIN hopital hop ON lab.idhop = hop.idhop
+                                                        WHERE  nom_hop = 'Jacques Monod'
+                                                    ) AND
+                        nom_hop != 'Jacques Monod');
+
+
+
+
+---------------------------------
+---           VUES            ---
+---------------------------------
+
+-- Vue 1 : Créer une vue qui regroupe les médecins chercheurs (nom, mail, spécialité) et le nom de leur hôpital
+
+CREATE OR REPLACE VIEW medecin_chercheur
+AS
+SELECT  m.nom_med, m.mail_med, m.spec, h.nom_hop
+FROM    medecin m JOIN hopital h ON m.idHop = h.idHop
+WHERE   fct = 'CHERCHEUR';
+
+SELECT * FROM medecin_chercheur;
+
+-- Vue 2 : Utiliser cette vue pour afficher les médecins chercheurs de l'hôpital Jacques Monod.
+
+SELECT  *
+FROM    medecin_chercheur
+WHERE   nom_hop = 'Jacques Monod';
+
+-- Vue 3 : Créer une vue contenant les premières consultations des patients (idPat, premiere_date)
+
+CREATE OR REPLACE VIEW premiere_consultation
+AS
+SELECT  idPat, MIN(date_consult) AS premiere_date
+FROM    consulte
+GROUP   BY idPat;
+
+SELECT * FROM premiere_consultation ORDER BY idPat;
+
+-- Fonction 4 : Utiliser cette vue pour écrire une fonction age_patient qui admet comme paramètre l’identifiant du patient et qui retourne l’âge du patient à sa première consultation.
+
+CREATE OR REPLACE FUNCTION age_patient( IN patientId patient.idPat%TYPE) RETURNS INTEGER
+AS
+$$
+    SELECT  (f.premiere_date - p.date_nais) / 365.25 AS ans
+    FROM    patient p JOIN premiere_consultation f ON p.idPat = f.idPat
+    WHERE   p.idPat = patientId;
+$$ LANGUAGE SQL;
+
+SELECT * FROM age_patient(4);
+
+-- Requête 5 : Écrire une requête qui donne la liste des consultations (nom du médecin, nom du patient) des patients de plus de 40 ans. Utiliser la fonction age_patient
+
+SELECT  m.nom_med AS "Nom Médecin", p.nom_pat AS "Nom Patient"
+FROM    medecin m JOIN consulte c ON m.idMed = c.idMed
+                  JOIN patient  p ON p.idPat = c.idPat
+WHERE   age_patient(c.idPat) > 40;
+
+
+-- Foncfion 6 : Écrire une fonction qui admet comme paramètre le nom d’un hôpital et qui retourne la liste des hôpitaux ayant au moins les mêmes les services que l'hôpital passé en paramètre
+
+
+CREATE OR REPLACE FUNCTION service_existe(nomHopital hopital.nom_hop%TYPE) RETURNS SETOF hopital
+AS
+$$
+SELECT  *
+FROM    hopital
+WHERE   nom_hop IN  (   SELECT nom_hop
+                        FROM   hopital hop JOIN service serv ON hop.idhop = serv.idhop
+                        WHERE  nom_serv IN  (
+                                                SELECT  nom_serv
+                                                FROM    hopital hop JOIN service serv ON serv.idhop = hop.idhop
+                                                WHERE   nom_hop = nomHopital
+                                            )
+                        GROUP BY nom_hop
+                        HAVING COUNT(hop.nom_hop) >=    (
+                                                            SELECT count(nom_serv)
+                                                            FROM   service serv JOIN hopital hop ON serv.idhop = hop.idhop
+                                                            WHERE  nom_hop = nomHopital
+                                                        )
+                     ) AND
+        nom_hop != nomHopital;
+$$ LANGUAGE SQL;
+
+SELECT * FROM service_existe('Jacques Monod');
+
+    </pre>
+
+</body>
+</html>

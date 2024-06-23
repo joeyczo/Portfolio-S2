@@ -513,7 +513,7 @@ nav .end a:visited
 }
 .crit-c .disp-grid-crit .link-table-h::after
 {
-    content: "\e5c8";
+    content: "\e89e";
     font-family: "Material Symbols Rounded", sans-serif;
     font-size: 2rem;
     margin-left: 20px;
@@ -637,6 +637,124 @@ nav .end a:visited
     height: 50dvh;
     z-index: -1;
 }
+
+
+
+/*************************/
+/*        PROJETS        */
+/*************************/
+
+.hero-p
+{
+    height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 90px;
+}
+.hero-p .infos
+{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.hero-p .infos h1
+{
+    font-size: 5rem;
+    font-weight: 800;
+}
+.hero-p .infos h2
+{
+    margin: 15px 0;
+}
+.c-pres img
+{
+    width: 100%;
+    height: auto;
+    user-select: none;
+    -webkit-user-select: none;
+}
+h1.infos-img
+{
+    margin: 50px 0 10px 0;
+}
+.infos-comp-proj
+{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0;
+}
+.infos-comp-proj .title-comp
+{
+    width: 55vw;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+}
+.infos-comp-proj .title-comp .check
+{
+    background: url("../img/c.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    background-size: 100% auto;
+    background-position: center center;
+    margin-right: 20px;
+}
+.infos-comp-proj .title-comp .not
+{
+    background: url("../img/n.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    background-size: 100% auto;
+    background-position: center center;
+    margin-right: 20px;
+}
+.infos-comp-proj .title-comp p
+{
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+.disp-tile
+{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 50px;
+    margin: 70px 0;
+}
+.disp-tile .item
+{
+    padding: 50px 20px;
+    border-radius: 20px;
+}
+.disp-tile .item p
+{
+    font-weight: 700;
+    font-size: 30px;
+}
+.disp-tile .open-n
+{
+    position: relative;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+.disp-tile .open-n:hover
+{
+    box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.25);
+}
+.disp-tile .open-n::after
+{
+    content: "\e89e";
+    font-family: "Material Symbols Rounded", sans-serif;
+    font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
 
 
 :root

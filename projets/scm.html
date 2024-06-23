@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>School More - CAZO Joey</title>
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          rel="stylesheet"/>
+</head>
+<body>
+
+<!-- NAV BAR -->
+
+<nav>
+
+    <div class="start">
+
+        <p>PortFolio - School More</p>
+
+    </div>
+
+    <div class="end">
+
+        <a href="#presentation">Présentation</a>
+
+        <a href="#competences">Compétences</a>
+
+    </div>
+
+</nav>
+
+<!-- FIN NAV BAR -->
+
+<!-- DEBUT HERO -->
+
+<div class="hero-p">
+
+    <div class="infos">
+
+        <h1>SCHOOL MORE</h1>
+
+        <h2 style="color: var(--couleur-competence-1)">Logiciel de vie scolaire</h2>
+
+    </div>
+    
+    <div class="img">
+
+        <img src="../img/scm/icon.svg" draggable="false" alt="ICON">
+        
+    </div>
+
+</div>
+
+<!-- FIN HERO -->
+
+<!-- DEBUT PRESENTATION -->
+
+<section class="c-pres" id="presentation">
+
+    <div class="titre">
+
+        <h2>Présentation</h2>
+
+        <h1 style="color: var(--couleur-competence-1-secondaire)">Présentation</h1>
+
+    </div>
+
+    <p>School More <i>(ou SCM)</i> est un logiciel de vie scolaire que j’ai décidé de créer pendant le confinement. Mon objectif n’est pas de le vendre ou même de l’utiliser, mais simplement de m’entraîner à développer des fonctionnalités qui peuvent être complexes. J’ai dabord créé la première version pendant le confinement, uniquement en HTML/CSS et PHP. Ensuite, j’ai développé une deuxième version en HTML/CSS/PHP et JavaScript en 2021/2022. Finalement, j’ai décidé de repartir de zéro en créant une maquette sur Figma et en développant l'application comme une application de bureau grâce aux technologies web, avec Node.js et Electron.</p>
+
+    <h1 class="infos-img">Première version</h1>
+
+    <img src="../img/scm/v1.png" draggable="false" alt="Version 1">
+
+    <h1 class="infos-img">Deuxième version</h1>
+
+    <img src="../img/scm/v2.png" draggable="false" alt="Version 2">
+
+    <h1 class="infos-img">Version en cours</h1>
+
+    <img src="../img/scm/v3.png" draggable="false" alt="Version en cours">
+
+</section>
+
+<!-- FIN PRESENTATION -->
+
+<div class="prt-sep-c">
+    <img alt="Séparateur" draggable="false" src="../img/c1/sep.svg">
+</div>
+
+<!-- DEBUT CRITERES -->
+
+<section class="crit-c" id="competences">
+
+
+    <div class="titre">
+
+        <h2>Compétences</h2>
+
+        <h1 style="color: var(--couleur-competence-1-secondaire)">Compétences</h1>
+
+    </div>
+
+    <div class="infos-comp-proj">
+
+        <div class="title-comp" style="background: var(--couleur-competence-1-tab);">
+
+            <div class="check"></div>
+
+            <p>Compétence 1</p>
+
+        </div>
+
+        <div class="disp-tile">
+
+            <div onclick="window.open('../img/scm/qualite.png')" style="background: var(--couleur-competence-1-tab2)" class="item open-n">
+
+                <p>Veiller à la qualité du code</p>
+
+            </div>
+
+            <div onclick="openExtEssai()" style="background: var(--couleur-competence-1-tab2)" class="item open-n">
+
+                <p>Faire des essais</p>
+
+            </div>
+
+            <div onclick="window.open('../img/scm/ihm.png')" style="background: var(--couleur-competence-1-tab2)" class="item open-n">
+
+                <p>Développer des interfaces utilisateurs</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+    var openExtEssai = () => {
+
+        window.open('../img/scm/test.png');
+        window.open('../img/scm/logs.json')
+
+    }
+
+</script>
+
+</body>
+</html>
